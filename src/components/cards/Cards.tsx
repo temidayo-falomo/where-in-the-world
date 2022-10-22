@@ -1,10 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AppContext } from "../../helpers/Context";
 import Card from "../card/Card";
 import { StyledCards } from "./Cards.styled";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 function Cards() {
   const { countries, searchText } = useContext(AppContext);
+
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
 
   return (
     <StyledCards>
@@ -20,7 +26,11 @@ function Cards() {
           }
         })
         .map((data: any) => {
-          return <Card {...data} key={data?.numericCode} />;
+          return (
+            <div key={data?.numericCode} data-aos="fade-up">
+              <Card {...data} />
+            </div>
+          );
         })}
     </StyledCards>
   );
