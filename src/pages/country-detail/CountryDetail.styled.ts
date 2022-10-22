@@ -79,6 +79,11 @@ export const StyledCountryDetail = styled.div`
         background-color: ${(props: any) =>
           props.theme === "light" ? "#fff" : "hsl(209, 23%, 22%)"};
         color: ${(props: any) => (props.theme === "light" ? "#000" : "#fff")};
+
+        :hover {
+          background-color: #000;
+          color: #fff;
+        }
       }
     }
   }
