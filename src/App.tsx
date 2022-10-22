@@ -1,25 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import GlobalStyle from "./Globalstyles";
+import { AppContext } from "./helpers/Context";
+import AllCountries from "./pages/all-countries/AllCountries";
+import CountryDetail from "./pages/country-detail/CountryDetail";
 
 function App() {
+  //Global States
+  const [countries, setCountries] = useState<any>([]);
+  const [countryInfo, setCountryInfo] = useState([]);
+  const [theme, setTheme] = useState<string>("light");
+  const [searchText, setSearchText] = useState<string>("");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContext.Provider
+      value={{
+        countries,
+        setCountries,
+        theme,
+        setTheme,
+        countryInfo,
+        setCountryInfo,
+        searchText,
+        setSearchText,
+      }}
+    >
+      <div className="App">
+        <GlobalStyle />
+        <Routes>
+          <Route path="/" element={<AllCountries />} />
+          <Route path="/detail" element={<CountryDetail />} />
+        </Routes>
+      </div>
+    </AppContext.Provider>
   );
 }
 
